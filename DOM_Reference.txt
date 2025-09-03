@@ -7,42 +7,73 @@ HTML STRUCTURE OVERVIEW
 -----------------------
 - Main container: <div class="app-container">
 - Title: <h1 class="app-title">
-- Content area: <div class="main-container">
-- Hustle items: <div class="hustle-item" id="...">
-- Button area: <div class="button-container">
-- Buttons: <button class="action-button" id="...">
+- Content wrapper: <div class="content-wrapper">
+- Left section: <div class="left-section">
+  - Content area: <div class="main-container">
+  - Hustle items: <div class="hustle-item" id="...">
+  - Button area: <div class="button-container">
+  - Buttons: <button class="action-button" id="...">
+- Right section: <div class="right-section">
+  - Data preview: <div class="data-preview" id="dataPreview">
+  - Preview header: <div class="preview-header">
+  - Preview content: <div class="preview-content">
+  - Data table: <table class="data-table" id="dataTable">
 
 DOM ELEMENTS BY ID
 ------------------
 These elements can be accessed using document.getElementById():
 
+HUSTLE ITEMS:
 1. numOne - First hustle item
 2. numTwo - Second hustle item  
 3. numThree - Third hustle item
 4. numFour - Fourth hustle item
 5. numFive - Fifth hustle item
+
+BUTTONS:
 6. buttonOne - First action button
 7. buttonTwo - Second action button
+
+DATA PREVIEW:
+8. dataPreview - Main data preview container
+9. dataTable - Data table element
 
 EXAMPLE JAVASCRIPT ACCESS:
 const firstItem = document.getElementById('numOne');
 const firstButton = document.getElementById('buttonOne');
+const previewTable = document.getElementById('dataTable');
 
 CSS CLASSES FOR SELECTION
 --------------------------
 These classes can be accessed using document.querySelector() or document.querySelectorAll():
 
+LAYOUT STRUCTURE:
 1. .app-container - Main application wrapper
 2. .app-title - Main title element
-3. .main-container - Container holding all hustle items
-4. .hustle-item - Individual hustle item (selects all 5 items)
-5. .button-container - Container holding both buttons
-6. .action-button - Individual button (selects both buttons)
+3. .content-wrapper - Two-column layout container
+4. .left-section - Left column container
+5. .right-section - Right column container
+
+MAIN CONTENT:
+6. .main-container - Container holding all hustle items
+7. .hustle-item - Individual hustle item (selects all 5 items)
+8. .button-container - Container holding both buttons
+9. .action-button - Individual button (selects both buttons)
+
+DATA PREVIEW:
+10. .data-preview - Data preview container
+11. .preview-header - Preview section header
+12. .preview-content - Scrollable content area
+13. .data-table - Table element
+14. .data-table th - Table headers
+15. .data-table td - Table cells
+16. .data-table tr - Table rows
 
 EXAMPLE JAVASCRIPT ACCESS:
 const allItems = document.querySelectorAll('.hustle-item');
 const allButtons = document.querySelectorAll('.action-button');
-const mainContainer = document.querySelector('.main-container');
+const tableRows = document.querySelectorAll('.data-table tr');
+const tableCells = document.querySelectorAll('.data-table td');
 
 COMMON JAVASCRIPT OPERATIONS
 -----------------------------
@@ -70,6 +101,27 @@ COMMON JAVASCRIPT OPERATIONS
    document.getElementById('numOne').style.display = 'none';
    document.getElementById('numOne').style.display = 'block';
 
+6. Update table content:
+   const tableBody = document.querySelector('.data-table tbody');
+   tableBody.innerHTML = '<tr><td>New Data</td><td>Values</td></tr>';
+
+7. Add new table row:
+   const newRow = document.createElement('tr');
+   newRow.innerHTML = '<td>Freelancing</td><td>High</td><td>Flexible</td><td>Skills</td>';
+   document.querySelector('.data-table tbody').appendChild(newRow);
+
+8. Access table data:
+   const tableData = [];
+   document.querySelectorAll('.data-table tbody tr').forEach(row => {
+       const cells = row.querySelectorAll('td');
+       tableData.push({
+           hustle: cells[0].textContent,
+           profit: cells[1].textContent,
+           time: cells[2].textContent,
+           experience: cells[3].textContent
+       });
+   });
+
 CSS CLASSES FOR STYLING STATES
 -------------------------------
 You can add these custom classes via JavaScript for different states:
@@ -78,12 +130,18 @@ You can add these custom classes via JavaScript for different states:
 - .disabled - Add to buttons when disabled
 - .hidden - Add to elements to hide them
 - .highlighted - Add to items for emphasis
+- .active - Add to table rows when selected
 
 Note: These state classes need to be defined in CSS if you want visual changes.
 
 RESPONSIVE CONSIDERATIONS
 -------------------------
-The layout is responsive and will stack buttons vertically on mobile devices (< 768px width).
+The layout is responsive:
+- Two-column layout on desktop (>1024px)
+- Single column layout on tablet/mobile (<1024px)
+- Button stacking on mobile (<768px)
+- Table height adjusts for different screen sizes
+
 JavaScript should account for this when calculating positions or sizes.
 
 DATA ATTRIBUTES
@@ -92,5 +150,35 @@ Consider adding data attributes to elements for storing additional information:
 - data-category="profit" 
 - data-difficulty="easy"
 - data-time-required="2-hours"
+- data-profit-level="high"
+- data-experience-type="teaching"
 
 These can be accessed via: element.dataset.category
+
+TABLE MANIPULATION EXAMPLES
+----------------------------
+
+1. Filter table rows:
+   const searchTerm = 'tutoring';
+   document.querySelectorAll('.data-table tbody tr').forEach(row => {
+       const text = row.textContent.toLowerCase();
+       row.style.display = text.includes(searchTerm.toLowerCase()) ? '' : 'none';
+   });
+
+2. Sort table by column:
+   const sortByProfit = () => {
+       const tbody = document.querySelector('.data-table tbody');
+       const rows = Array.from(tbody.querySelectorAll('tr'));
+       rows.sort((a, b) => {
+           const aProfit = a.cells[1].textContent;
+           const bProfit = b.cells[1].textContent;
+           return aProfit.localeCompare(bProfit);
+       });
+       rows.forEach(row => tbody.appendChild(row));
+   };
+
+3. Highlight table row on hover:
+   document.querySelectorAll('.data-table tbody tr').forEach(row => {
+       row.addEventListener('mouseenter', () => row.classList.add('highlighted'));
+       row.addEventListener('mouseleave', () => row.classList.remove('highlighted'));
+   });
