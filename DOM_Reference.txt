@@ -1,0 +1,96 @@
+SIDE HUSTLE EXPLORER - DOM REFERENCE FOR JAVASCRIPT
+=====================================================
+
+This document provides a reference for all DOM elements and CSS classes that can be accessed through JavaScript for the Side Hustle Explorer application.
+
+HTML STRUCTURE OVERVIEW
+-----------------------
+- Main container: <div class="app-container">
+- Title: <h1 class="app-title">
+- Content area: <div class="main-container">
+- Hustle items: <div class="hustle-item" id="...">
+- Button area: <div class="button-container">
+- Buttons: <button class="action-button" id="...">
+
+DOM ELEMENTS BY ID
+------------------
+These elements can be accessed using document.getElementById():
+
+1. numOne - First hustle item
+2. numTwo - Second hustle item  
+3. numThree - Third hustle item
+4. numFour - Fourth hustle item
+5. numFive - Fifth hustle item
+6. buttonOne - First action button
+7. buttonTwo - Second action button
+
+EXAMPLE JAVASCRIPT ACCESS:
+const firstItem = document.getElementById('numOne');
+const firstButton = document.getElementById('buttonOne');
+
+CSS CLASSES FOR SELECTION
+--------------------------
+These classes can be accessed using document.querySelector() or document.querySelectorAll():
+
+1. .app-container - Main application wrapper
+2. .app-title - Main title element
+3. .main-container - Container holding all hustle items
+4. .hustle-item - Individual hustle item (selects all 5 items)
+5. .button-container - Container holding both buttons
+6. .action-button - Individual button (selects both buttons)
+
+EXAMPLE JAVASCRIPT ACCESS:
+const allItems = document.querySelectorAll('.hustle-item');
+const allButtons = document.querySelectorAll('.action-button');
+const mainContainer = document.querySelector('.main-container');
+
+COMMON JAVASCRIPT OPERATIONS
+-----------------------------
+
+1. Add click event to all hustle items:
+   document.querySelectorAll('.hustle-item').forEach(item => {
+       item.addEventListener('click', function() {
+           console.log('Clicked:', this.id);
+       });
+   });
+
+2. Add click event to specific button:
+   document.getElementById('buttonOne').addEventListener('click', function() {
+       console.log('Button One clicked');
+   });
+
+3. Change content of hustle item:
+   document.getElementById('numOne').textContent = 'New Content';
+
+4. Add/remove CSS classes:
+   document.getElementById('numOne').classList.add('selected');
+   document.getElementById('numOne').classList.remove('selected');
+
+5. Hide/show elements:
+   document.getElementById('numOne').style.display = 'none';
+   document.getElementById('numOne').style.display = 'block';
+
+CSS CLASSES FOR STYLING STATES
+-------------------------------
+You can add these custom classes via JavaScript for different states:
+
+- .selected - Add to hustle items when selected
+- .disabled - Add to buttons when disabled
+- .hidden - Add to elements to hide them
+- .highlighted - Add to items for emphasis
+
+Note: These state classes need to be defined in CSS if you want visual changes.
+
+RESPONSIVE CONSIDERATIONS
+-------------------------
+The layout is responsive and will stack buttons vertically on mobile devices (< 768px width).
+JavaScript should account for this when calculating positions or sizes.
+
+DATA ATTRIBUTES
+---------------
+Consider adding data attributes to elements for storing additional information:
+- data-category="profit" 
+- data-difficulty="easy"
+- data-time-required="2-hours"
+
+These can be accessed via: element.dataset.category

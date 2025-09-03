@@ -1,0 +1,116 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+/* Main app container */
+.app-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+/* App title */
+.app-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Main container with hustle items */
+.main-container {
+    background-color: #e8e8e8;
+    border: 2px solid #999;
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Individual hustle items */
+.hustle-item {
+    background-color: #b8d4f0;
+    border: 1px solid #7ba7d9;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.hustle-item:hover {
+    background-color: #a5c9ed;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Action buttons */
+.action-button {
+    background-color: #e8e8e8;
+    border: 2px solid #999;
+    border-radius: 15px;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 150px;
+}
+
+.action-button:hover {
+    background-color: #d8d8d8;
+    border-color: #777;
+}
+
+.action-button:active {
+    transform: translateY(1px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .app-container {
+        padding: 10px;
+    }
+    
+    .app-title {
+        font-size: 2rem;
+    }
+    
+    .main-container {
+        padding: 20px;
+    }
+    
+    .button-container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .action-button {
+        min-width: 200px;
+    }
+}
