@@ -11,8 +11,6 @@ I built this as a tiny, values-aware prototype to help teens compare side hustle
 - **`side-hustles.js`** – a seed array of hustle objects with the fields below.
 - **`script.js`** – the logic: **filter → sort → slice → display**. I used named helper functions (no arrow shorthand) so beginners can read them.
 
-![Side Hustle Explorer – UI Mock](UI%20Design.png)
-
 ---
 
 ## Schema I used
@@ -26,10 +24,6 @@ I built this as a tiny, values-aware prototype to help teens compare side hustle
   category: string      // e.g., Outdoors, Tutoring, Digital…
 }
 ```
-
-![Schema Plan](Schema%20Plan.png)
-
----
 
 ## Quick start
 
@@ -46,8 +40,12 @@ I built this as a tiny, values-aware prototype to help teens compare side hustle
 2. **Sketch the UI first.**  
    I generated plain HTML/CSS that looks like the final thing but shows static data. Only when that felt clear did I wire the buttons.
 
+![Side Hustle Explorer – UI Mock](UI%20Design.png)
+
 3. **Lock the schema, then seed data.**  
    I picked five fields that map cleanly to classroom questions about *money* and *feasibility*. I seeded ~40 entries in `side-hustles.js` so we can demo without clerical work.
+
+![Schema Plan](Schema%20Plan.png)
 
 4. **Map features to array methods before coding.**  
    Used a “secret loop” pattern (filter/sort/slice) 
