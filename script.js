@@ -16,12 +16,16 @@
 // - Displays the top 5 results in numOne through numFive
 function showHighPayingJobs() {
     // TODO 2a: Use .filter() to get hustles with hourlyRate >= 18
-    
+    const filtered = hustles.filter(hustle => hustle.hourlyRate >= 18);
+
     // TODO 2b: Use .sort() to arrange by hourlyRate (highest to lowest)
+    const sorted = filtered.sort((a, b) => b.hourlyRate - a.hourlyRate);
     
     // TODO 2c: Take only the first 5 results using .slice(0, 5)
+    const topFive = sorted.slice(0, 5);
     
     // TODO 2d: Call displayResults() function to show in DOM elements
+    displayResults(topFive);
     
 }
 
@@ -35,12 +39,16 @@ function showHighPayingJobs() {
 // - Displays the top 5 results in numOne through numFive
 function showLowCostJobs() {
     // TODO 3a: Use .filter() to get hustles with costs <= 1
+    const filtered = hustles.filter(hustle => hustle.costs <= 1);
     
     // TODO 3b: Use .sort() to arrange by costs (lowest to highest)
+    const sorted = filtered.sort((a, b) => a.costs - b.costs);
     
     // TODO 3c: Take only the first 5 results using .slice(0, 5)
+    const topFive = sorted.slice(0, 5);
     
     // TODO 3d: Call displayResults() function to show in DOM elements
+    displayResults(topFive);
     
 }
 
@@ -55,21 +63,32 @@ function showLowCostJobs() {
 function displayResults(hustleArray) {
     // TODO 4a: Get references to DOM elements numOne through numFive
     // Hint: Use document.getElementById() for each element
-    
+    const slots = [
+        document.getElementById('numOne'),
+        document.getElementById('numTwo'),
+        document.getElementById('numThree'),
+        document.getElementById('numFour'),
+        document.getElementById('numFive')
+    ]
     // TODO 4b: Loop through the hustleArray (up to 5 items)
     // Hint: Use a for loop or forEach, but limit to 5 items
+
     
     // TODO 4c: For each hustle, create a display string with:
     // - Hustle name
     // - Hourly rate (formatted as currency)
     // - Startup costs (formatted as currency)
     // Example format: "Tutoring - $22/hr (Costs: $0)"
-    
+  
     // TODO 4d: Set the textContent of each DOM element to the formatted string
     
     // TODO 4e: If there are fewer than 5 results, clear the remaining elements
     // Hint: Set textContent to empty string for unused elements
-    
+    slots[0].textContent = hustleArray[0].name + " - $" + hustleArray[0].hourlyRate + "/hr (Costs: $" + hustleArray[0].costs + ")";
+    slots[1].textContent = hustleArray[1].name + " - $" + hustleArray[1].hourlyRate + "/hr (Costs: $" + hustleArray[1].costs + ")";
+    slots[2].textContent = hustleArray[2].name + " - $" + hustleArray[2].hourlyRate + "/hr (Costs: $" + hustleArray[2].costs + ")";
+    slots[3].textContent = hustleArray[3].name + " - $" + hustleArray[3].hourlyRate + "/hr (Costs: $" + hustleArray[3].costs + ")";
+    slots[4].textContent = hustleArray[4].name + " - $" + hustleArray[4].hourlyRate + "/hr (Costs: $" + hustleArray[4].costs + ")";  
 }
 
 // ===========================================
@@ -82,10 +101,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // TODO 5a: Get reference to buttonOne and add click event listener
     // When clicked, it should call showHighPayingJobs()
-    
+    const buttonOne = document.getElementById('buttonOne');
+    buttonOne.addEventListener('click', showHighPayingJobs);
     // TODO 5b: Get reference to buttonTwo and add click event listener  
     // When clicked, it should call showLowCostJobs()
-    
+    const buttonTwo = document.getElementById('buttonTwo');
+    buttonTwo.addEventListener('click', showLowCostJobs);
 });
 
 // ===========================================
