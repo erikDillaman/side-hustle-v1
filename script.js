@@ -6,6 +6,14 @@
 // Hint: Make sure the side-hustles.js file is loaded before this script
 
 
+const slots = [
+    document.getElementById('numOne'),
+    document.getElementById('numTwo'),
+    document.getElementById('numThree'),
+    document.getElementById('numFour'),
+    document.getElementById('numFive')
+]
+
 // ===========================================
 // BUTTON ONE FUNCTIONALITY - HIGH PAYING JOBS
 // ===========================================
@@ -16,17 +24,24 @@
 // - Displays the top 5 results in numOne through numFive
 function showHighPayingJobs() {
     // TODO 2a: Use .filter() to get hustles with hourlyRate >= 18
-    const filtered = hustles.filter(hustle => hustle.hourlyRate >= 18);
+    const filtered = hustles.filter(isRateHighEnough);
 
     // TODO 2b: Use .sort() to arrange by hourlyRate (highest to lowest)
-    const sorted = filtered.sort((a, b) => b.hourlyRate - a.hourlyRate);
+    const sorted = filtered.sort(compareRates);
     
     // TODO 2c: Take only the first 5 results using .slice(0, 5)
     const topFive = sorted.slice(0, 5);
     
     // TODO 2d: Call displayResults() function to show in DOM elements
     displayResults(topFive);
-    
+}
+
+function isRateHighEnough(hustle) {
+    return hustle.hourlyRate >= 18;
+}
+
+function compareRates(a, b) {
+    return b.hourlyRate - a.hourlyRate;
 }
 
 // ===========================================
@@ -39,17 +54,24 @@ function showHighPayingJobs() {
 // - Displays the top 5 results in numOne through numFive
 function showLowCostJobs() {
     // TODO 3a: Use .filter() to get hustles with costs <= 1
-    const filtered = hustles.filter(hustle => hustle.costs <= 1);
+    const filtered = hustles.filter(isCostLowEnough);
     
     // TODO 3b: Use .sort() to arrange by costs (lowest to highest)
-    const sorted = filtered.sort((a, b) => a.costs - b.costs);
+    const sorted = filtered.sort(compareCosts);
     
     // TODO 3c: Take only the first 5 results using .slice(0, 5)
     const topFive = sorted.slice(0, 5);
     
     // TODO 3d: Call displayResults() function to show in DOM elements
-    displayResults(topFive);
-    
+    displayResults(topFive)
+}
+
+function isCostLowEnough(hustle) {
+    return hustle.costs <= 1;
+}
+
+function compareCosts(a, b) {
+    return a.costs - b.costs;
 }
 
 // ===========================================
@@ -63,13 +85,7 @@ function showLowCostJobs() {
 function displayResults(hustleArray) {
     // TODO 4a: Get references to DOM elements numOne through numFive
     // Hint: Use document.getElementById() for each element
-    const slots = [
-        document.getElementById('numOne'),
-        document.getElementById('numTwo'),
-        document.getElementById('numThree'),
-        document.getElementById('numFour'),
-        document.getElementById('numFive')
-    ]
+
     // TODO 4b: Loop through the hustleArray (up to 5 items)
     // Hint: Use a for loop or forEach, but limit to 5 items
 
